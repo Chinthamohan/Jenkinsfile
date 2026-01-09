@@ -12,6 +12,11 @@ pipeline {
       }
     }
              stage {
+               steps ('Terraform fmt'){
+                 sh 'terraform fmt'
+               }
+             }
+             stage {
                steps ('Terraform apply') {
                  input message: 'Approve Terraform Apply?'
                  sh 'terraform apply -auto-approve'
