@@ -1,10 +1,11 @@
 pipeline {
-agent any
-stages {
-stage ('Hello'){
-steps {
-echo "Jenkins is working"
-}
-}
-}
+  agent any 
+  Stages {
+    stage ('Check Server') {
+      steps {
+        sh 'whoami'
+        sh 'uname -a'
+      }
+    }
+  }
 }
