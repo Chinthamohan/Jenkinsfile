@@ -6,21 +6,21 @@ pipeline {
         sh 'terraform init'
       }
     }
-    stage {
-      steps ('Terraform plan'){
+    stage ('Terraform plan'){
+      steps {
              sh 'terraform plan'
       }
     }
-             stage {
-               steps ('Terraform fmt'){
-                 sh 'terraform fmt'
-               }
-             }
-             stage {
-               steps ('Terraform apply') {
-                 input message: 'Approve Terraform Apply?'
-                 sh 'terraform apply -auto-approve'
-               }
-             }
+    stage ('Terraform fmt'){
+      steps {
+        sh 'terraform fmt'
+     }
+  }
+   stage ('Terraform apply'){ 
+     steps  {
+       input message: 'Approve Terraform Apply?'
+       sh 'terraform apply -auto-approve'
+    }
+  }
   }
 }
