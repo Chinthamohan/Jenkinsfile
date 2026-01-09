@@ -1,15 +1,21 @@
 pipeline {
   agent any
-  environment {
-    ENM = "Dev"
-    REGION = "us-east-1"
-  }
   stages {
-    stage ('print vars'){
+    stage ('Terraform init'){
       steps {
-        sh 'echo Environment is $ENV'
-        sh 'echo Region is $REGION'
+        sh 'terraform init'
       }
     }
+    stage {
+      steps (Terraform plan'){
+             sh 'terraform plan'
+      }
+    }
+             stage {
+               steps ('Terraform apply') {
+                 input message: 'Approve Terraform Apply?'
+                 sh 'terraform apply -auto-approve'
+               }
+             }
   }
 }
