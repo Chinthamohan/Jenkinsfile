@@ -1,10 +1,14 @@
 pipeline {
-  agent any 
+  agent any
+  environment {
+    Env = "Dev"
+    Region = "us-east-1"
+  }
   stages {
-    stage ('Check Server') {
+    stage ('print vars'){
       steps {
-        sh 'whoami'
-        sh 'uname -a'
+        sh 'echo Environment is $Env'
+        sh 'echo Region is $Region'
       }
     }
   }
